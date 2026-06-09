@@ -9,8 +9,8 @@ export interface ContactMessage {
 }
 
 export async function submitContactMessage(data: ContactMessage) {
-  if (!isSupabaseConfigured || !supabase) {
-    throw new Error('Supabase is not configured. Check your .env file.');
+  if (!supabase) {
+    throw new Error('Supabase is not configured.')
   }
 
   const { error } = await supabase.from('contact_messages').insert({
@@ -19,24 +19,19 @@ export async function submitContactMessage(data: ContactMessage) {
     email: data.email,
     subject: data.subject,
     message: data.message,
-  });
+  })
 
-  if (error) throw error;
+  if (error) throw error
 }
 
-export async function subscribeToNewsletter(email: string) {
-  if (!isSupabaseConfigured || !supabase) {
-    throw new Error('Supabase is not configured. Check your .env file.');
+export async function subscribeNewsletter(email: string) {
+  if (!supabase) {
+    throw new Error('Supabase is not configured.')
   }
 
-  const { error } = await supabase.from('newsletter_subscribers').insert({ email });
+  const { error } = await supabase.from('newsletter_subscribers').insert({
+    email,
+  })
 
-  if (error) {
-    if (error.code === '23505') {
-      return { alreadySubscribed: true as const };
-    }
-    throw error;
-  }
-
-  return { alreadySubscribed: false as const };
+  if (error) throw error
 }
