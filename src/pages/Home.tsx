@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { subscribeToNewsletter } from '../lib/database';
+import { subscribeNewsletter } from '../lib/database';
 import { ArrowRight, Sparkles, Truck, Shield, Leaf } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import ProductCard from '../components/ProductCard';
@@ -59,7 +59,7 @@ export default function Home() {
     setNewsletterStatus('idle');
 
     try {
-      await subscribeToNewsletter(newsletterEmail.trim());
+      await subscribeNewsletter(newsletterEmail.trim());
       setNewsletterEmail('');
       setNewsletterStatus('success');
       setTimeout(() => setNewsletterStatus('idle'), 4000);

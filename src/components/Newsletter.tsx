@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Send, Sparkles } from 'lucide-react';
-import { subscribeToNewsletter } from '../lib/database';
+import { subscribeNewsletter } from '../lib/database';
 
 export default function Newsletter() {
   const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ export default function Newsletter() {
     setError(null);
 
     try {
-      const result = await subscribeToNewsletter(email.trim());
+      const result = await subscribeNewsletter(email.trim());
       setSubmitted(true);
       setEmail('');
       if (result.alreadySubscribed) {

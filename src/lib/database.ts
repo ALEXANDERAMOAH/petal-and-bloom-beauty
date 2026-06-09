@@ -24,7 +24,7 @@ export async function submitContactMessage(data: ContactMessage) {
   if (error) throw error
 }
 
-export async function subscribeToNewsletter(email: string) {
+export async function subscribeNewsletter(email: string) {
   if (!supabase) {
     throw new Error('Supabase is not configured.')
   }
